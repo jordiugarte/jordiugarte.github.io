@@ -1,7 +1,7 @@
 name: Deploy React
 on:
   push:
-    branches: [main] # Runs every time you push to main
+    branches: [master] # Runs every time you push to main
 permissions:
   contents: read
   pages: write
