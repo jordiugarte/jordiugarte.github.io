@@ -155,10 +155,10 @@ function App() {
                     Jordi Ugarte
                   </Typography>
                   <Typography variant="h5" sx={{ textAlign: 'center', mt: 2, opacity: 0.8 }}>
-                    Software Engineer & Full Stack Developer
+                    Software Engineer & Artist
                   </Typography>
                   <Typography variant="body1" sx={{ textAlign: 'center', mt: 4, maxWidth: '800px', mx: 'auto', lineHeight: 1.8 }}>
-                    Born in 1999, Bolivia. I'm a multi-disciplinary Software Engineer and Artist. Art and design are not choices, but rather necessities to have more human experiences on everywhere we interact with.
+                    Born in 1999, Bolivia. Engineer, designer and videogame enthusiast. I believe art and design are not choices, but rather necessities to have more human experiences on everywhere we interact with.
                   </Typography>
                 </Container>
               } />
