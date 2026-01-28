@@ -1,7 +1,7 @@
 name: Deploy React
 on:
   push:
-    branches: [master] # Runs every time you push to main
+    branches: [master]
 permissions:
   contents: read
   pages: write
@@ -20,5 +20,5 @@ jobs:
       - uses: actions/configure-pages@v4
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: ./public # Change to ./build if you aren't using Vite
+          path: ./build # Change to ./build if you aren't using Vite
       - uses: actions/deploy-pages@v4
