@@ -67,24 +67,22 @@ export const darkTheme = createTheme({
     fontFamily: '"Inter", "Helvetica", "Arial", sans-serif',
     h1: {
       fontSize: '5rem',
-      fontWeight: 700,
+      fontWeight: 200,
       '@media (max-width:600px)': {
         fontSize: '3.5rem',
       },
     },
     h5: {
       fontSize: '2.5rem',
-      fontWeight: 500,
+      fontWeight: 200,
       '@media (max-width:600px)': {
         fontSize: '2rem',
       },
     },
     body1: {
-      fontSize: '1.3rem',
-      lineHeight: 1.8,
-      '@media (max-width:600px)': {
-        fontSize: '1.1rem',
-      },
+      fontSize: '1.1rem',
+      lineHeight: 1,
+      fontWeight: 100,
     },
   },
   components: {
@@ -142,8 +140,9 @@ export const lightTheme = createTheme({
       },
     },
     body1: {
-      fontSize: '1.3rem',
-      lineHeight: 1.8,
+      fontSize: '1rem',
+      lineHeight: 1.5,
+      fontWeight: 100,
       '@media (max-width:600px)': {
         fontSize: '1.1rem',
       },

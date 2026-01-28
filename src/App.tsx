@@ -87,7 +87,7 @@ const Navigation = () => {
               whiteSpace: 'nowrap',
             }}
           >
-            JORDI UGARTE
+            Home
           </Typography>
         </Box>
         {!isMobile && (
@@ -152,20 +152,13 @@ function App() {
               <Route path="/" element={
                 <Container maxWidth="lg" sx={{ py: 4 }}>
                   <Typography variant="h1" component="h1" sx={{ textAlign: 'center' }}>
-                    Welcome to My Portfolio
+                    Jordi Ugarte
                   </Typography>
                   <Typography variant="h5" sx={{ textAlign: 'center', mt: 2, opacity: 0.8 }}>
                     Software Engineer & Full Stack Developer
                   </Typography>
                   <Typography variant="body1" sx={{ textAlign: 'center', mt: 4, maxWidth: '800px', mx: 'auto', lineHeight: 1.8 }}>
-                    I'm a passionate software engineer with expertise in full-stack development, specializing in React, TypeScript, and Node.js. 
-                    With experience at companies like Amazon and Accenture, I've developed scalable applications and led technical initiatives 
-                    that drive business growth. My focus is on creating efficient, user-friendly solutions while maintaining high code quality 
-                    and following best practices.
-                  </Typography>
-                  <Typography variant="body1" sx={{ textAlign: 'center', mt: 3, maxWidth: '800px', mx: 'auto', lineHeight: 1.8 }}>
-                    Beyond coding, I'm also a musician and artist, bringing creativity and attention to detail to everything I do. 
-                    I believe in continuous learning and staying at the forefront of technology to deliver innovative solutions.
+                    Born in 1999, Bolivia. I'm a multi-disciplinary Software Engineer and Artist. Art and design are not choices, but rather necessities to have more human experiences on everywhere we interact with.
                   </Typography>
                 </Container>
               } />
