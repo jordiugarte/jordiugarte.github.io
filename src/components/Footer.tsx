@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Container, Typography, Link, IconButton, Tooltip, useTheme } from '@mui/material';
 import { FaEnvelope, FaLinkedin, FaGithub } from 'react-icons/fa';
-import { IconBaseProps } from 'react-icons';
+import type { IconBaseProps } from 'react-icons';
 import { useMediaQuery } from '@mui/material';
 
 const Footer: React.FC = () => {

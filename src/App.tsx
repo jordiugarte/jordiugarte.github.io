@@ -1,16 +1,19 @@
-import React from 'react';
-import { ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import { Box, Container, Typography, AppBar, Toolbar, IconButton, useMediaQuery, useTheme } from '@mui/material';
-import { FaCamera, FaMusic, FaPalette, FaBars } from 'react-icons/fa';
-import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import { darkTheme, lightTheme } from './theme';
-import type { IconBaseProps } from 'react-icons';
-import Photography from './components/Photography';
-import Music from './components/Music';
-import Art from './components/Art';
-import Footer from './components/Footer';
+import './App.css'
+
+import React from 'react'
+import { ThemeProvider } from '@mui/material/styles'
+import CssBaseline from '@mui/material/CssBaseline'
+import { Box, Container, Typography, AppBar, Toolbar, IconButton, useMediaQuery, useTheme } from '@mui/material'
+import { FaCamera, FaMusic, FaPalette, FaBars } from 'react-icons/fa'
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { darkTheme, lightTheme } from './theme'
+import type { IconBaseProps } from 'react-icons'
+
+import Photography from './components/Photography'
+import Music from './components/Music'
+import Art from './components/Art'
+import Footer from './components/Footer'
 
 const sections = [
   // { Icon: FaCode, id: 'software', path: '/software', title: 'Software', size: 24 },

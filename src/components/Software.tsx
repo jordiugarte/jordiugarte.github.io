@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Container, Typography } from '@mui/material';
 import { FaCode } from 'react-icons/fa';
 import { motion } from 'framer-motion';
-import { IconBaseProps } from 'react-icons';
+import type { IconBaseProps } from 'react-icons';
 
 const Software: React.FC = () => {
   const Icon = FaCode as React.ComponentType<IconBaseProps>;

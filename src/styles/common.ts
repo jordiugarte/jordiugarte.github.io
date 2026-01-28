@@ -1,4 +1,3 @@
-import { SxProps, Theme } from '@mui/material';
 import { colors } from '../theme';
 
 export const commonStyles = {

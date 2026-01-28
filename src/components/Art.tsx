@@ -2,33 +2,23 @@ import React, { useState } from 'react';
 import { Box, Container, Typography, Card, CardMedia, Dialog, DialogContent, IconButton } from '@mui/material';
 import { FaPalette, FaTimes } from 'react-icons/fa';
 import { motion } from 'framer-motion';
-import { IconBaseProps } from 'react-icons';
 
-// Automatically import all images from the art folder
-function importAll(r: any): string[] { return r.keys().map(r); }
-const artImages: string[] = importAll((require as any).context('../assets/images/art', false, /\.(jpg|jpeg|png|gif)$/));
+// 1. Replace require.context with Vite's glob import
+// This finds all images in the folder and returns their URLs
+const imageModules = import.meta.glob('../assets/images/art/*.{jpg,jpeg,png,gif}', { 
+  eager: true, 
+  import: 'default' 
+});
+
+const artImages = Object.values(imageModules) as string[];
 
 const Art: React.FC = () => {
-  const Icon = FaPalette as React.ComponentType<IconBaseProps>;
-  const CloseIcon = FaTimes as React.ComponentType<IconBaseProps>;
+  // 2. No need for complex casting; react-icons work as standard components
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   
-  const handleContextMenu = (e: React.MouseEvent) => {
-    e.preventDefault();
-  };
+  const handleContextMenu = (e: React.MouseEvent) => e.preventDefault();
+  const handleDragStart = (e: React.DragEvent) => e.preventDefault();
 
-  const handleDragStart = (e: React.DragEvent) => {
-    e.preventDefault();
-  };
-
-  const handleImageClick = (image: string) => {
-    setSelectedImage(image);
-  };
-
-  const handleClosePreview = () => {
-    setSelectedImage(null);
-  };
-  
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -46,58 +36,33 @@ const Art: React.FC = () => {
         }}
       >
         <Box sx={{ textAlign: 'center', mb: 4 }}>
-          <Icon size={40} />
+          {/* Use the component directly */}
+          <FaPalette size={40} />
           <Typography variant="h2" component="h2" sx={{ mt: 2 }}>
             Art
           </Typography>
         </Box>
+
         <Container maxWidth="lg">
           <Box
             sx={{
               display: 'grid',
-              gridTemplateColumns: {
-                xs: '1fr',
-                sm: 'repeat(2, 1fr)',
-                md: 'repeat(3, 1fr)',
-              },
+              gridTemplateColumns: { xs: '1fr', sm: 'repeat(2, 1fr)', md: 'repeat(3, 1fr)' },
               gap: 2,
             }}
           >
-            {artImages.map((image: string, index: number) => (
-              <motion.div
-                key={index}
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.2 }}
-              >
+            {artImages.map((image, index) => (
+              <motion.div key={index} whileHover={{ scale: 1.02 }}>
                 <Card 
                   sx={{ 
-                    height: '100%',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    overflow: 'hidden',
-                    borderRadius: 2,
-                    boxShadow: 3,
-                    '&:hover': {
-                      boxShadow: 6,
-                      cursor: 'pointer',
-                    },
-                    position: 'relative',
+                    height: '100%', borderRadius: 2, boxShadow: 3, cursor: 'pointer',
+                    position: 'relative', overflow: 'hidden' 
                   }}
-                  onClick={() => handleImageClick(image)}
+                  onClick={() => setSelectedImage(image)}
                 >
+                  {/* Overlay to prevent dragging/right-click */}
                   <Box
-                    sx={{
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      bottom: 0,
-                      zIndex: 1,
-                      userSelect: 'none',
-                      WebkitUserSelect: 'none',
-                      MozUserSelect: 'none',
-                      msUserSelect: 'none',
-                    }}
+                    sx={{ position: 'absolute', inset: 0, zIndex: 1 }}
                     onContextMenu={handleContextMenu}
                     onDragStart={handleDragStart}
                   />
@@ -105,20 +70,7 @@ const Art: React.FC = () => {
                     component="img"
                     image={image}
                     alt={`Art piece ${index + 1}`}
-                    sx={{
-                      height: 300,
-                      objectFit: 'cover',
-                      transition: 'transform 0.3s ease-in-out',
-                      '&:hover': {
-                        transform: 'scale(1.05)',
-                      },
-                      pointerEvents: 'none',
-                      userSelect: 'none',
-                      WebkitUserSelect: 'none',
-                      MozUserSelect: 'none',
-                      msUserSelect: 'none',
-                    }}
-                    draggable="false"
+                    sx={{ height: 300, objectFit: 'cover' }}
                   />
                 </Card>
               </motion.div>
@@ -127,52 +79,20 @@ const Art: React.FC = () => {
         </Container>
       </Box>
 
-      <Dialog
-        open={!!selectedImage}
-        onClose={handleClosePreview}
-        maxWidth="lg"
-        fullWidth
-        PaperProps={{
-          sx: {
-            bgcolor: 'rgba(0, 0, 0, 0.9)',
-            boxShadow: 24,
-            borderRadius: 2,
-            overflow: 'hidden',
-          },
-        }}
-      >
-        <DialogContent sx={{ p: 0, position: 'relative' }}>
+      <Dialog open={!!selectedImage} onClose={() => setSelectedImage(null)} maxWidth="lg" fullWidth>
+        <DialogContent sx={{ p: 0, position: 'relative', bgcolor: 'black' }}>
           <IconButton
-            onClick={handleClosePreview}
-            sx={{
-              position: 'absolute',
-              right: 8,
-              top: 8,
-              color: 'white',
-              bgcolor: 'rgba(0, 0, 0, 0.5)',
-              '&:hover': {
-                bgcolor: 'rgba(0, 0, 0, 0.7)',
-              },
-            }}
+            onClick={() => setSelectedImage(null)}
+            sx={{ position: 'absolute', right: 8, top: 8, color: 'white', zIndex: 10 }}
           >
-            <CloseIcon />
+            <FaTimes />
           </IconButton>
           {selectedImage && (
             <Box
               component="img"
               src={selectedImage}
               alt="Art preview"
-              sx={{
-                width: '100%',
-                height: 'auto',
-                maxHeight: '90vh',
-                objectFit: 'contain',
-                userSelect: 'none',
-                WebkitUserSelect: 'none',
-                MozUserSelect: 'none',
-                msUserSelect: 'none',
-              }}
-              draggable="false"
+              sx={{ width: '100%', maxHeight: '90vh', objectFit: 'contain' }}
               onContextMenu={handleContextMenu}
               onDragStart={handleDragStart}
             />
@@ -183,4 +103,4 @@ const Art: React.FC = () => {
   );
 };
 
-export default Art; 
+export default Art;
