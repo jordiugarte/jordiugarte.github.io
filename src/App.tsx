@@ -152,7 +152,7 @@ function App() {
               <Route path="/" element={
                 <Container maxWidth="lg" sx={{ py: 4 }}>
                   <Typography variant="h1" component="h1" sx={{ textAlign: 'center' }}>
-                    Jordi Ugarte
+                    Hi, my name is Jordi Ugarte
                   </Typography>
                   <Typography variant="h5" sx={{ textAlign: 'center', mt: 2, opacity: 0.8 }}>
                     Software Engineer & Artist
