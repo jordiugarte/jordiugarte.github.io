@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Container, Typography, Card, CardMedia, Dialog, DialogContent, IconButton } from '@mui/material';
+import { Box, Container, Typography, Card, Dialog, DialogContent, IconButton } from '@mui/material';
 import { FaPalette, FaTimes } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
@@ -66,11 +66,13 @@ const Art: React.FC = () => {
                     onContextMenu={handleContextMenu}
                     onDragStart={handleDragStart}
                   />
-                  <CardMedia
+                  <Box
                     component="img"
-                    image={image}
+                    src={image}
                     alt={`Art piece ${index + 1}`}
-                    sx={{ height: 300, objectFit: 'cover' }}
+                    loading="lazy"
+                    draggable="false"
+                    sx={{ height: 300, width: '100%', objectFit: 'cover' }}
                   />
                 </Card>
               </motion.div>

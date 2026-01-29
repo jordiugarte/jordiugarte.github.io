@@ -61,6 +61,7 @@ const Footer: React.FC = () => {
         display: 'flex',
         alignItems: 'center',
         transition: 'background-color 0.3s ease, backdrop-filter 0.3s ease',
+        zIndex: 10,
       }}
     >
       <Container maxWidth="lg">

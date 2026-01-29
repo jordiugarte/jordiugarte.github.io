@@ -4,7 +4,7 @@ import { Box, Typography } from "@mui/material";
 function HomeText() {
     return (
         <>
-        <Typography variant="h3" component="h3" sx={{ textAlign: 'center' }}>
+        <Typography variant="h3" component="h3" sx={{ textAlign: 'left' }}>
             <Box
                 component="span"
                 sx={{
@@ -14,7 +14,7 @@ function HomeText() {
                 Hi! My name is Jordi,
             </Box>
         </Typography>
-        <Typography variant="h3" component="h3" sx={{ textAlign: 'center' }}>
+        <Typography variant="h3" component="h3" sx={{ textAlign: 'left' }}>
             <Box
                 component="span"
                 sx={{

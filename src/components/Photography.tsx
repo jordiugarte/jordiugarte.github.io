@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Card, CardMedia, Container, Typography, Dialog, DialogContent, IconButton } from '@mui/material';
+import { Box, Card, Container, Typography, Dialog, DialogContent, IconButton } from '@mui/material';
 import { FaCamera, FaTimes } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
@@ -91,12 +91,15 @@ const Photography: React.FC = () => {
                     onContextMenu={handleContextMenu}
                     onDragStart={handleDragStart}
                   />
-                  <CardMedia
+                  <Box
                     component="img"
-                    image={image}
-                    alt={image}
+                    src={image}
+                    alt={`Photography ${index + 1}`}
+                    loading="lazy"
+                    draggable="false"
                     sx={{
                       height: 300,
+                      width: '100%',
                       objectFit: 'cover',
                       transition: 'transform 0.3s ease-in-out',
                       '&:hover': {
@@ -108,7 +111,6 @@ const Photography: React.FC = () => {
                       MozUserSelect: 'none',
                       msUserSelect: 'none',
                     }}
-                    draggable="false"
                   />
                 </Card>
               </motion.div>
