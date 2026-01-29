@@ -14,6 +14,7 @@ import Photography from './components/Photography'
 import Music from './components/Music'
 import Art from './components/Art'
 import Footer from './components/Footer'
+import HomeText from './components/HomeText'
 
 const sections = [
   // { Icon: FaCode, id: 'software', path: '/software', title: 'Software', size: 24 },
@@ -150,16 +151,8 @@ function App() {
           }}>
             <Routes>
               <Route path="/" element={
-                <Container maxWidth="lg" sx={{ py: 4 }}>
-                  <Typography variant="h1" component="h1" sx={{ textAlign: 'center' }}>
-                    Hi, my name is Jordi Ugarte
-                  </Typography>
-                  <Typography variant="h5" sx={{ textAlign: 'center', mt: 2, opacity: 0.8 }}>
-                    Software Engineer & Artist
-                  </Typography>
-                  <Typography variant="body1" sx={{ textAlign: 'center', mt: 4, maxWidth: '800px', mx: 'auto', lineHeight: 1.8 }}>
-                    Born in 1999, Bolivia. Engineer, designer and videogame enthusiast. I believe art and design are not choices, but rather necessities to have more human experiences on everywhere we interact with.
-                  </Typography>
+                <Container maxWidth="lg" sx={{ py: 4 }}>                  
+                  <HomeText />
                 </Container>
               } />
               {/* <Route path="/software" element={<Software />} /> */}
