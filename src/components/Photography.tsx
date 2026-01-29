@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Card, Container, Typography, Dialog, DialogContent, IconButton } from '@mui/material';
-import { FaCamera, FaTimes } from 'react-icons/fa';
+import { FaTimes } from 'react-icons/fa';
 import { motion } from 'framer-motion';
-
-// Static imports for all photography images
-const imageModules = import.meta.glob('../assets/images/photography/*.{jpg,jpeg,png,gif}', { 
-  eager: true, 
-  import: 'default' 
-});
-
-const photographyImages = Object.values(imageModules) as string[];
+import type { MediaAsset } from '../model/MediaAsset';
+import { loadMediaFromCSV } from '../utils/LoadMediaFromCSV';
 
 const Photography: React.FC = () => {
+  const [assets, setAssets] = useState<MediaAsset[]>([])
+
+  useEffect(() => {
+    loadMediaFromCSV('photography.csv')
+      .then(data => setAssets(data))
+      .catch(err => console.error("Loading failed", err));
+  }, []);
+  
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const handleContextMenu = (e: React.MouseEvent) => e.preventDefault();
@@ -35,8 +37,7 @@ const Photography: React.FC = () => {
         }}
       >
         <Box sx={{ textAlign: 'center', mb: 4 }}>
-          <FaCamera size={40} />
-          <Typography variant="h2" component="h2" sx={{ mt: 2 }}>
+          <Typography variant="h1" component="h1" sx={{ mt: 2 }}>
             Photography
           </Typography>
         </Box>
@@ -53,7 +54,7 @@ const Photography: React.FC = () => {
               gap: 2,
             }}
           >
-            {photographyImages.map((image, index) => (
+            {assets.map((image, index) => (
               <motion.div
                 key={index}
                 whileHover={{ scale: 1.02 }}
@@ -73,7 +74,7 @@ const Photography: React.FC = () => {
                     },
                     position: 'relative',
                   }}
-                  onClick={() => setSelectedImage(image)}
+                  onClick={() => setSelectedImage(`/images/photography/photography${image.id}.jpg`)}
                 >
                   <Box
                     sx={{
@@ -93,8 +94,8 @@ const Photography: React.FC = () => {
                   />
                   <Box
                     component="img"
-                    src={image}
-                    alt={`Photography ${index + 1}`}
+                    src={`/images/thumbnails/photography/photography${image.id}.jpg`}
+                    alt={image.description}
                     loading="lazy"
                     draggable="false"
                     sx={{
@@ -153,7 +154,7 @@ const Photography: React.FC = () => {
             <Box
               component="img"
               src={selectedImage}
-              alt="Photography preview"
+              alt={selectedImage}
               sx={{
                 width: '100%',
                 height: 'auto',

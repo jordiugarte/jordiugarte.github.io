@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Container, Typography, Card, Dialog, DialogContent, IconButton } from '@mui/material';
-import { FaPalette, FaTimes } from 'react-icons/fa';
+import { FaTimes } from 'react-icons/fa';
 import { motion } from 'framer-motion';
-
-// 1. Replace require.context with Vite's glob import
-// This finds all images in the folder and returns their URLs
-const imageModules = import.meta.glob('../assets/images/art/*.{jpg,jpeg,png,gif}', { 
-  eager: true, 
-  import: 'default' 
-});
-
-const artImages = Object.values(imageModules) as string[];
+import type { MediaAsset } from '../model/MediaAsset';
+import { loadMediaFromCSV } from '../utils/LoadMediaFromCSV';
 
 const Art: React.FC = () => {
-  // 2. No need for complex casting; react-icons work as standard components
+  const [assets, setAssets] = useState<MediaAsset[]>([])
+
+  useEffect(() => {
+    loadMediaFromCSV('art.csv')
+      .then(data => setAssets(data))
+      .catch(err => console.error("Loading failed", err));
+  }, []);
+
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   
   const handleContextMenu = (e: React.MouseEvent) => e.preventDefault();
@@ -36,9 +36,7 @@ const Art: React.FC = () => {
         }}
       >
         <Box sx={{ textAlign: 'center', mb: 4 }}>
-          {/* Use the component directly */}
-          <FaPalette size={40} />
-          <Typography variant="h2" component="h2" sx={{ mt: 2 }}>
+          <Typography variant="h1" component="h1" sx={{ mt: 2 }}>
             Art
           </Typography>
         </Box>
@@ -51,14 +49,14 @@ const Art: React.FC = () => {
               gap: 2,
             }}
           >
-            {artImages.map((image, index) => (
+            {assets.map((image, index) => (
               <motion.div key={index} whileHover={{ scale: 1.02 }}>
                 <Card 
                   sx={{ 
                     height: '100%', borderRadius: 2, boxShadow: 3, cursor: 'pointer',
                     position: 'relative', overflow: 'hidden' 
                   }}
-                  onClick={() => setSelectedImage(image)}
+                  onClick={() => setSelectedImage(`/images/art/art${image.id}.jpg`)}
                 >
                   {/* Overlay to prevent dragging/right-click */}
                   <Box
@@ -68,8 +66,8 @@ const Art: React.FC = () => {
                   />
                   <Box
                     component="img"
-                    src={image}
-                    alt={`Art piece ${index + 1}`}
+                    src={`/images/thumbnails/art/art${image.id}.jpg`}
+                    alt={image.description}
                     loading="lazy"
                     draggable="false"
                     sx={{ height: 300, width: '100%', objectFit: 'cover' }}
@@ -93,7 +91,7 @@ const Art: React.FC = () => {
             <Box
               component="img"
               src={selectedImage}
-              alt="Art preview"
+              alt={selectedImage}
               sx={{ width: '100%', maxHeight: '90vh', objectFit: 'contain' }}
               onContextMenu={handleContextMenu}
               onDragStart={handleDragStart}

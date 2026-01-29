@@ -43,8 +43,7 @@ const Music: React.FC = () => {
         }}
       >
         <Box sx={{ textAlign: 'center', mb: 4 }}>
-          <Icon size={40} />
-          <Typography variant="h2" component="h2" sx={{ mt: 2 }}>
+          <Typography variant="h1" component="h1" sx={{ mt: 2 }}>
             Music
           </Typography>
         </Box>
