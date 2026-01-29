@@ -1,7 +1,7 @@
-import React, { Suspense } from 'react';
+import { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useGLTF, Environment, Center } from '@react-three/drei';
-import { Box, CircularProgress } from '@mui/material';
+import { Box } from '@mui/material';
 
 interface ModelProps {
   modelPath: string;
