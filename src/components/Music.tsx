@@ -24,7 +24,6 @@ const albums = [
 ];
 
 const Music: React.FC = () => {
-  const Icon = FaMusic as React.ComponentType<IconBaseProps>;
   
   return (
     <motion.div
