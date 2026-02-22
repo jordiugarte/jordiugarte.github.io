@@ -15,7 +15,6 @@ import Music from './components/Music'
 import Art from './components/Art'
 import Footer from './components/Footer'
 import HomeText from './components/HomeText'
-import Model3DViewer from './components/Model'
 
 const sections = [
   // { Icon: FaCode, id: 'software', path: '/software', title: 'Software', size: 24 },
@@ -142,34 +141,7 @@ function App() {
           minHeight: '100vh',
           display: 'flex',
           flexDirection: 'column',
-          position: 'relative',
         }}>
-          {/* 3D Model as fixed background for all pages */}
-          <Box
-            sx={{
-              position: 'fixed',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              zIndex: 0,
-              pointerEvents: 'none',
-            }}
-          >
-            <Model3DViewer modelPath={'3d/model.glb'} height="100%" />
-            {/* Dark overlay to dim the 3D model */}
-            <Box
-              sx={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                backgroundColor: 'rgba(0, 0, 0, 0.5)', // Adjust opacity (0.0 - 1.0) to control darkness
-              }}
-            />
-          </Box>
-
           <Navigation />
           <Box sx={{ 
             pt: '64px',
@@ -177,8 +149,6 @@ function App() {
             flex: 1,
             display: 'flex',
             flexDirection: 'column',
-            position: 'relative',
-            zIndex: 1,
           }}>
             <Routes>
               <Route path="/" element={
